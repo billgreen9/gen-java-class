@@ -62,7 +62,7 @@ public class CodeGenerator {
 		cfg.setDefaultEncoding("UTF-8");
 		cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
-		Template temp = cfg.getTemplate("dao.ftl"); // load E:/Work/Freemarker/templates/person.ftl
+		Template temp = cfg.getTemplate("daoImpl.ftl"); // load E:/Work/Freemarker/templates/person.ftl
 
 		// Create the root hash
 		Map<String, Object> root = new HashMap<String, Object>();

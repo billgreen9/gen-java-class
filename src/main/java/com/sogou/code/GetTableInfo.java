@@ -64,6 +64,10 @@ public class GetTableInfo {
 					vo.setType("Long");
 				} else if ("timestamp".equals(dataType) || "datetime".equals(dataType)) {
 					vo.setType("Date");
+				} else if ("decimal".equals(dataType)||"float".equals(dataType)) {
+					vo.setType("Float");
+				}else if ("Double".equals(dataType)) {
+					vo.setType("Double");
 				} else {
 					vo.setType("String");
 				}

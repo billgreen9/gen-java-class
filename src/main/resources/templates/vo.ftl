@@ -1,6 +1,7 @@
 package ${packageName};
 
 import java.util.List;
+import java.util.Date;
 
 /**
  *  @author 
