@@ -11,7 +11,9 @@ public class ColumnVO {
 
 	private String tableName;
 	private String type;
-	private String name;
+	private String name;//驼峰名称,首字母大写
+	private String dbField;///数据库字段
+	private String field;//驼峰名称,首字母小写
 	private String comment;
 
 	public String getTableName() {
@@ -45,5 +47,23 @@ public class ColumnVO {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
+	public String getDbField() {
+		return dbField;
+	}
+
+	public void setDbField(String dbField) {
+		this.dbField = dbField;
+	}
+	
+	
 
 }

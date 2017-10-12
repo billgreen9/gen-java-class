@@ -11,6 +11,12 @@ import java.util.List;
 import com.sogou.code.vo.ColumnVO;
 
 public class GetTableInfo {
+	
+	private static String driver ="com.mysql.jdbc.Driver";
+	private static String username = "root";
+	private static String password = "root!@#$";
+	private static String db = "test";
+	private static String url = "jdbc:mysql://10.134.105.155:3306/"+db;
 
 	public static String getCamelName(String name) {
 		StringBuilder result = new StringBuilder();
@@ -20,6 +26,10 @@ public class GetTableInfo {
 				result.append(item.substring(0, 1).toUpperCase() + item.substring(1));
 		}
 		return result.toString();
+	}
+	
+	public static List<ColumnVO> getColumns(String tableName) throws SQLException{
+		return getColumns(driver, url, username, password, tableName,db);
 	}
 
 	public static List<ColumnVO> getColumns(String driver, String url, String username, String password, String table,
@@ -40,7 +50,7 @@ public class GetTableInfo {
 			con = DriverManager.getConnection(url, username, password);
 			ps = con.prepareStatement(
 					"select table_name,column_name,column_comment,data_type,column_type,column_key,column_default from INFORMATION_SCHEMA.Columns where table_name='"
-							+ table + "' and table_schema='" + db + "'");
+							+ table.toLowerCase() + "' and table_schema='" + db.toLowerCase() + "'");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -57,8 +67,10 @@ public class GetTableInfo {
 				} else {
 					vo.setType("String");
 				}
+				vo.setDbField(rs.getString("column_name"));
 				vo.setComment(rs.getString("column_comment"));
 				vo.setName(getCamelName(rs.getString("column_name")));
+				vo.setField(vo.getName().substring(0, 1).toLowerCase() + vo.getName().substring(1));
 				vo.setTableName(getCamelName(rs.getString("table_name")));
 				columns.add(vo);
 			}
@@ -78,8 +90,14 @@ public class GetTableInfo {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		System.out.println(getCamelName("hello_nihao_zhongguo_ren"));
+		List<ColumnVO> cols = getColumns("game_kaifu");
+		System.out.println("-----");
+		for(ColumnVO col:cols) {
+			System.out.println(col.getName());
+		}
+		
 	}
 
 }
