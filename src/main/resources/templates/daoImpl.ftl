@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ${packageName}.dao;
+package ${packageName}.dao.impl;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import ${packageName}.${className};
+import ${packageName}.dto.${className};
 
 
 
@@ -61,6 +61,7 @@ public class ${className}DaoImpl implements ${className}Dao {
 		List<Object> params = new ArrayList<Object>();
 		
 		<#list attrs as attr>
+		<#if attr_index!=0>
 		<#if attr.type='String'>
 		if (isNotBlank(entity.get${attr.field?cap_first}())) {
 			sql.append("${attr.dbField} = ?,");
@@ -71,6 +72,7 @@ public class ${className}DaoImpl implements ${className}Dao {
 			sql.append("${attr.dbField} = ?,");
 			params.add(entity.get${attr.field?cap_first}());
 		}
+		</#if>
 		</#if>
 		</#list>
 
@@ -124,8 +126,6 @@ public class ${className}DaoImpl implements ${className}Dao {
 		
 		return keyHolder.getKey();
 	}
-	
-	
 	
 
 }

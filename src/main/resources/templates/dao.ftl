@@ -1,24 +1,30 @@
-package ${packageName};
+/**
+ * 
+ */
+package ${packageName}.dao;
 
-import java.util.List;
-import java.util.Date;
+import ${packageName}.dto.${className};
 
 /**
- *  @author 
+ * @author 
+ *
  */
-public class ${className} {
-    <#list attrs as attr>
-    //${attr.comment} 
-    private ${attr.type} ${attr.field};
-    </#list>
+public interface ${className}Dao {
 
-    <#list attrs as attr>
-    public void set${attr.name?cap_first}(${attr.type} ${attr.field}){
-        this.${attr.field} = ${attr.field};
-    }
-    public ${attr.type} get${attr.name?cap_first}(){
-        return this.${attr.field};
-    }
+	${className} get(Object id);
 
-    </#list>
+	int delete(Object id);
+
+	int update(${className} entity);
+
+	/**
+	 * save data and not return the data id
+	 */
+	void insert(${className} entity);
+
+	/**
+	 * save data and return the data id
+	 */
+	Number save(${className} entity);
+	
 }

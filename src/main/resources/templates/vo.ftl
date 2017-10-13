@@ -1,12 +1,14 @@
-package ${packageName};
+package ${packageName}.dto;
 
 import java.util.List;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  *  @author 
  */
-public class ${className} {
+public class ${className} implements Serializable{
+	private static final long serialVersionUID = 1L;
     <#list attrs as attr>
     //${attr.comment} 
     private ${attr.type} ${attr.field};
